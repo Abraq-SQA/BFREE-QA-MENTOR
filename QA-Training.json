@@ -1,0 +1,277 @@
+{
+	"info": {
+		"_postman_id": "3b814d34-24b2-4e84-8da1-11e8d737ddfd",
+		"name": "QA-Training",
+		"schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json"
+	},
+	"item": [
+		{
+			"name": "crm",
+			"item": [
+				{
+					"name": "agent",
+					"item": [
+						{
+							"name": "Login as an agent",
+							"event": [
+								{
+									"listen": "test",
+									"script": {
+										"exec": [
+											"const jsonData = pm.response.json();",
+											"const name = 'agent101'",
+											"",
+											"pm.test(\"Status code is 200\", function () {",
+											"    pm.response.to.have.status(200);",
+											"});",
+											"",
+											"pm.test(\"Verify agent's name\", function () {",
+											"    pm.expect(jsonData.data.authenticate.user.name).to.eql(name);",
+											"});",
+											"",
+											""
+										],
+										"type": "text/javascript"
+									}
+								}
+							],
+							"request": {
+								"method": "POST",
+								"header": [],
+								"body": {
+									"mode": "graphql",
+									"graphql": {
+										"query": "query login ($email: String!, $password: String!){\n  authenticate (email: $email, password:$password){\n    token\n    refresh\n    accessTokenExpiry\n    refreshTokenExpiry\n    user{\n      id\n      name\n      kind\n      email\n      agent{\n        partners{\n          id\n          name\n        }\n      }\n    }\n  }\n}",
+										"variables": "{\n    \"email\" : \"agent.test@gmial.com\",\n    \"password\" : \"555555\"\n}"
+									}
+								},
+								"url": {
+									"raw": "https://staging-backend.bfree.com.ng/api/",
+									"protocol": "https",
+									"host": [
+										"staging-backend",
+										"bfree",
+										"com",
+										"ng"
+									],
+									"path": [
+										"api",
+										""
+									]
+								}
+							},
+							"response": []
+						},
+						{
+							"name": "Login as an agent with invalid email",
+							"event": [
+								{
+									"listen": "test",
+									"script": {
+										"exec": [
+											"const jsonData = pm.response.json();",
+											"",
+											"pm.test(\"incorrect email or password\", function () {",
+											"    pm.expect(jsonData.errors[0].message).to.eql(\"incorrect email or password\");",
+											"});",
+											"",
+											""
+										],
+										"type": "text/javascript"
+									}
+								}
+							],
+							"request": {
+								"method": "POST",
+								"header": [],
+								"body": {
+									"mode": "graphql",
+									"graphql": {
+										"query": "query login ($email: String!, $password: String!){\n  authenticate (email: $email, password:$password){\n    token\n    refresh\n    accessTokenExpiry\n    refreshTokenExpiry\n    user{\n      id\n      name\n      kind\n      email\n      agent{\n        partners{\n          id\n          name\n        }\n      }\n    }\n  }\n}",
+										"variables": "{\n    \"email\" : \"agent.test@gmial\",\n    \"password\" : \"555555\"\n}"
+									}
+								},
+								"url": {
+									"raw": "https://staging-backend.bfree.com.ng/api/",
+									"protocol": "https",
+									"host": [
+										"staging-backend",
+										"bfree",
+										"com",
+										"ng"
+									],
+									"path": [
+										"api",
+										""
+									]
+								}
+							},
+							"response": []
+						},
+						{
+							"name": "Login as an agent with no credentials",
+							"event": [
+								{
+									"listen": "test",
+									"script": {
+										"exec": [
+											"const jsonData = pm.response.json();",
+											"",
+											"pm.test(\"incorrect email or password\", function () {",
+											"    pm.expect(jsonData.errors[0].message).to.eql(\"incorrect email or password\");",
+											"});",
+											"",
+											""
+										],
+										"type": "text/javascript"
+									}
+								}
+							],
+							"request": {
+								"method": "POST",
+								"header": [],
+								"body": {
+									"mode": "graphql",
+									"graphql": {
+										"query": "query login ($email: String!, $password: String!){\n  authenticate (email: $email, password:$password){\n    token\n    refresh\n    accessTokenExpiry\n    refreshTokenExpiry\n    user{\n      id\n      name\n      kind\n      email\n      agent{\n        partners{\n          id\n          name\n        }\n      }\n    }\n  }\n}",
+										"variables": "{\n    \"email\" : \"\",\n    \"password\" : \"\"\n}"
+									}
+								},
+								"url": {
+									"raw": "https://staging-backend.bfree.com.ng/api/",
+									"protocol": "https",
+									"host": [
+										"staging-backend",
+										"bfree",
+										"com",
+										"ng"
+									],
+									"path": [
+										"api",
+										""
+									]
+								}
+							},
+							"response": []
+						},
+						{
+							"name": "Login as an agent with incorrect credentials",
+							"event": [
+								{
+									"listen": "test",
+									"script": {
+										"exec": [
+											"const jsonData = pm.response.json();",
+											"",
+											"pm.test(\"incorrect email or password\", function () {",
+											"    pm.expect(jsonData.errors[0].message).to.eql(\"incorrect email or password\");",
+											"});",
+											"",
+											""
+										],
+										"type": "text/javascript"
+									}
+								}
+							],
+							"request": {
+								"method": "POST",
+								"header": [],
+								"body": {
+									"mode": "graphql",
+									"graphql": {
+										"query": "query login ($email: String!, $password: String!){\n  authenticate (email: $email, password:$password){\n    token\n    refresh\n    accessTokenExpiry\n    refreshTokenExpiry\n    user{\n      id\n      name\n      kind\n      email\n      agent{\n        partners{\n          id\n          name\n        }\n      }\n    }\n  }\n}",
+										"variables": "{\n    \"email\" : \"agent.test@gmial.com\",\n    \"password\" : \"\"\n}"
+									}
+								},
+								"url": {
+									"raw": "https://staging-backend.bfree.com.ng/api/",
+									"protocol": "https",
+									"host": [
+										"staging-backend",
+										"bfree",
+										"com",
+										"ng"
+									],
+									"path": [
+										"api",
+										""
+									]
+								}
+							},
+							"response": []
+						},
+						{
+							"name": "Login as an agent with incorrect credentials (email)",
+							"event": [
+								{
+									"listen": "test",
+									"script": {
+										"exec": [
+											"const jsonData = pm.response.json();",
+											"",
+											"pm.test(\"incorrect email or password\", function () {",
+											"    pm.expect(jsonData.errors[0].message).to.eql(\"incorrect email or password\");",
+											"});",
+											"",
+											""
+										],
+										"type": "text/javascript"
+									}
+								}
+							],
+							"request": {
+								"method": "POST",
+								"header": [],
+								"body": {
+									"mode": "graphql",
+									"graphql": {
+										"query": "query login ($email: String!, $password: String!){\n  authenticate (email: $email, password:$password){\n    token\n    refresh\n    accessTokenExpiry\n    refreshTokenExpiry\n    user{\n      id\n      name\n      kind\n      email\n      agent{\n        partners{\n          id\n          name\n        }\n      }\n    }\n  }\n}",
+										"variables": "{\n    \"email\" : \"\",\n    \"password\" : \"555555\"\n}"
+									}
+								},
+								"url": {
+									"raw": "https://staging-backend.bfree.com.ng/api/",
+									"protocol": "https",
+									"host": [
+										"staging-backend",
+										"bfree",
+										"com",
+										"ng"
+									],
+									"path": [
+										"api",
+										""
+									]
+								}
+							},
+							"response": []
+						}
+					]
+				}
+			]
+		}
+	],
+	"auth": {
+		"type": "bearer"
+	},
+	"event": [
+		{
+			"listen": "prerequest",
+			"script": {
+				"type": "text/javascript",
+				"exec": [
+					""
+				]
+			}
+		},
+		{
+			"listen": "test",
+			"script": {
+				"type": "text/javascript",
+				"exec": [
+					""
+				]
+			}
+		}
+	]
+}
