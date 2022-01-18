@@ -245,6 +245,134 @@
 								}
 							},
 							"response": []
+						},
+						{
+							"name": "searchCustomer by tags",
+							"event": [
+								{
+									"listen": "test",
+									"script": {
+										"exec": [
+											""
+										],
+										"type": "text/javascript"
+									}
+								}
+							],
+							"request": {
+								"auth": {
+									"type": "bearer",
+									"bearer": [
+										{
+											"key": "token",
+											"value": "{{Agent-token}}",
+											"type": "string"
+										}
+									]
+								},
+								"method": "POST",
+								"header": [],
+								"body": {
+									"mode": "graphql",
+									"graphql": {
+										"query": "query searchCustomer ($page: Page!, $q: CustomerSearchRequest) {\n    searchCustomer (page: $page, q: $q) {\n        items {\n            id\n            partnerId\n            agentId\n            userId\n            loanId\n            systemId\n            name\n            address\n            lga\n            city\n            state\n            accountNumber\n            bankName\n            telephone\n            userTelephone\n            bvnNumber\n            bvnTelephone\n            guarantorName\n            guarantorAddress\n            guarantorTelephone\n            guarantorRelationship\n            createdAt\n            updatedAt\n            assignedAt\n            weight\n            risk\n            classification\n            dnd\n            dndAt\n            tags\n            balanceRemaining\n            instalments{\n                id\n                amountPreviouslyPaidByCustomer\n                amountCollected\n            }\n        }\n      }\n  }\n",
+										"variables": "{\n  \"page\": {\n    \"number\": 1,\n    \"size\": 10,\n    \"sortBy\": \"updated_at\",\n    \"sortDirectionDesc\": true\n  },\n  \"q\": {\n    \"partnerIds\": [\n        \"fbeca4ee-c5f0-47f3-99d6-3adec9a2907f\"\n    ],\n    \"agentId\": \"539a421d-0eef-4b9c-84b1-d64b3079e86e\",\n    \"completed\": false,\n    \"strictlyHasInstalment\": true,\n     \"reached\": false,\n     \"ptpType\": null,\n     \"tag\": \"91-120\"\n  }\n}"
+									}
+								},
+								"url": {
+									"raw": "{{url }}",
+									"host": [
+										"{{url }}"
+									]
+								}
+							},
+							"response": []
+						},
+						{
+							"name": "searchCustomer",
+							"event": [
+								{
+									"listen": "test",
+									"script": {
+										"exec": [
+											"",
+											""
+										],
+										"type": "text/javascript"
+									}
+								}
+							],
+							"request": {
+								"auth": {
+									"type": "bearer",
+									"bearer": [
+										{
+											"key": "token",
+											"value": "{{Agent-token}}",
+											"type": "string"
+										}
+									]
+								},
+								"method": "POST",
+								"header": [],
+								"body": {
+									"mode": "graphql",
+									"graphql": {
+										"query": "query searchCustomer ($page: Page!, $q: CustomerSearchRequest) {\n    searchCustomer (page: $page, q: $q) {\n        items {\n            id\n            partnerId\n            agentId\n            userId\n            loanId\n            systemId\n            name\n            address\n            lga\n            city\n            state\n            accountNumber\n            bankName\n            telephone\n            userTelephone\n            bvnNumber\n            bvnTelephone\n            guarantorName\n            guarantorAddress\n            guarantorTelephone\n            guarantorRelationship\n            createdAt\n            updatedAt\n            assignedAt\n            weight\n            risk\n            classification\n            dnd\n            dndAt\n            tags\n            balanceRemaining\n            instalments{\n                id\n                amountPreviouslyPaidByCustomer\n                amountCollected\n            }\n        }\n      }\n  }\n",
+										"variables": "{\n  \"page\": {\n    \"number\": 1,\n    \"size\": 10,\n    \"sortBy\": \"updated_at\",\n    \"sortDirectionDesc\": true\n  },\n  \"q\": {\n    \"partnerIds\": [\n        \"fbeca4ee-c5f0-47f3-99d6-3adec9a2907f\",\n        \"89e47c63-406f-46a6-8f4f-82af8eb963cf\"\n    ],\n    \"completed\": false,\n    \"strictlyHasInstalment\": true,\n     \"reached\": true,\n     \"ptpType\": null\n  }\n}"
+									}
+								},
+								"url": {
+									"raw": "{{url }}",
+									"host": [
+										"{{url }}"
+									]
+								}
+							},
+							"response": []
+						},
+						{
+							"name": "searchCustomerByPtpDate",
+							"event": [
+								{
+									"listen": "test",
+									"script": {
+										"exec": [
+											"",
+											""
+										],
+										"type": "text/javascript"
+									}
+								}
+							],
+							"request": {
+								"auth": {
+									"type": "bearer",
+									"bearer": [
+										{
+											"key": "token",
+											"value": "{{Agent-token}}",
+											"type": "string"
+										}
+									]
+								},
+								"method": "POST",
+								"header": [],
+								"body": {
+									"mode": "graphql",
+									"graphql": {
+										"query": "query searchCustomerByPtpDate ($page: Page!, $day: String!) {\n    searchCustomerByPtpDate (page: $page, day: $day) {\n        items {\n            id\n            loanId\n            name\n            tags\n          balanceRemaining\n          instalments{\n            id\n            customerId\n            loanInstalmentId\n            totalAmountToRepay\n            \n          }\n        }\n  }\n  \n}",
+										"variables": "{\n  \"page\": {\n    \"number\": 1,\n    \"size\": 10,\n    \"sortBy\": \"created_at\",\n    \"sortDirectionDesc\": true\n  },\n  \"day\": \"2021-12-31\"\n}"
+									}
+								},
+								"url": {
+									"raw": "{{url }}",
+									"host": [
+										"{{url }}"
+									]
+								}
+							},
+							"response": []
 						}
 					]
 				}
